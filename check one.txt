@@ -1,0 +1,15 @@
+import tabula
+
+# Specify the path to your PDF file
+pdf_path = "C:\Users\MR\OneDrive\Ragothaman\Rago workings\My Folder\PERSONAL\TEAM\THAL\INVOICES"
+
+# Specify the output Excel file path
+excel_output_path = "C:\Users\MR\OneDrive\Ragothaman\Rago workings\My Folder\PERSONAL\TEAM\THAL\INVOICES"
+
+# Read PDF into a DataFrame
+df_list = tabula.read_pdf(pdf_path, pages='all', multiple_tables=True)
+
+# Convert each DataFrame to an Excel sheet
+with pd.ExcelWriter(excel_output_path) as writer:
+    for i, df in enumerate(df_list):
+        df.to_excel(writer, sheet_name=f'Sheet_{i+1}', index=False)
